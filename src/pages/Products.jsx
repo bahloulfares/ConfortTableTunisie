@@ -1,110 +1,171 @@
-import React, { useState } from 'react';
-
-// Données fictives pour les produits
-const productData = [
+import React, { useState } from "react";
+import "./Products.css";
+const productSections = [
   {
-    id: 1,
-    name: 'Table à manger rustique',
-    category: 'Tables',
-    description: 'Table à manger en chêne massif avec finition naturelle.',
-    image: 'https://images.unsplash.com/photo-1577140917170-285929fb55b7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80',
+    title: 'Salons de thé',
+    description: 'Découvrez nos salons de thé artisanaux, disponibles en 2 ou 4 places.',
+    products: [
+      {
+        id: 1,
+        name: 'Salon de thé (2 places)',
+        description: 'Idéal pour les petits espaces.',
+        image: 'https://via.placeholder.com/400x300?text=Salon+2+places',
+      },
+      {
+        id: 2,
+        name: 'Salon de thé (4 places)',
+        description: 'Parfait pour les familles.',
+        image: 'https://via.placeholder.com/400x300?text=Salon+4+places',
+      },
+    ],
   },
   {
-    id: 2,
-    name: 'Chaise scandinave',
-    category: 'Chaises',
-    description: 'Chaise en bois de hêtre avec assise en tissu beige.',
-    image: 'https://images.unsplash.com/photo-1551298370-9d3d53740c72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80',
+    title: 'Meubles d’entrée',
+    description: 'Organisez votre entrée avec style.',
+    products: [
+      {
+        id: 3,
+        name: "Meuble d'entrée",
+        description: 'Fonctionnel et élégant.',
+        image: 'https://via.placeholder.com/400x300?text=Meuble+entrée',
+      },
+    ],
   },
   {
-    id: 3,
-    name: 'Étagère murale',
-    category: 'Rangements',
-    description: 'Étagère murale en noyer avec supports en métal noir.',
-    image: 'https://images.unsplash.com/photo-1594620302200-9a762244a156?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1339&q=80',
+    title: 'Tables basses',
+    description: 'Ajoutez une touche moderne à votre salon.',
+    products: [
+      {
+        id: 4,
+        name: 'Table basse',
+        description: 'En bois massif.',
+        image: 'https://via.placeholder.com/400x300?text=Table+basse',
+      },
+    ],
   },
   {
-    id: 4,
-    name: 'Bureau moderne',
-    category: 'Tables',
-    description: 'Bureau en bois de frêne avec tiroirs de rangement.',
-    image: 'https://images.unsplash.com/photo-1518455027359-f3f8164ba6bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1365&q=80',
+    title: 'Tables TV',
+    description: 'Meubles TV élégants et pratiques.',
+    products: [
+      {
+        id: 5,
+        name: 'Table TV',
+        description: 'Avec rangements.',
+        image: 'https://via.placeholder.com/400x300?text=Table+TV',
+      },
+    ],
   },
   {
-    id: 5,
-    name: 'Tabouret de bar',
-    category: 'Chaises',
-    description: 'Tabouret de bar en bois avec repose-pieds en métal.',
-    image: 'https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80',
-  },
-  {
-    id: 6,
-    name: 'Bibliothèque sur mesure',
-    category: 'Rangements',
-    description: 'Bibliothèque en chêne massif avec étagères ajustables.',
-    image: 'https://images.unsplash.com/photo-1588279102080-a8333fd4dc10?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1365&q=80',
+    title: 'Poufs',
+    description: 'Confort et design réunis.',
+    products: [
+      {
+        id: 6,
+        name: 'Poof',
+        description: 'Multifonctionnel et cosy.',
+        image: 'https://via.placeholder.com/400x300?text=Poof',
+      },
+    ],
   },
 ];
 
 const Products = () => {
-  const [activeCategory, setActiveCategory] = useState('Tous');
-  
-  const categories = ['Tous', 'Tables', 'Chaises', 'Rangements'];
-  
-  const filteredProducts = activeCategory === 'Tous' 
-    ? productData 
-    : productData.filter(product => product.category === activeCategory);
-  
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
+  // Ouvrir la modale avec un produit
+  const openModal = (product) => {
+    setSelectedProduct(product);
+  };
+
+  // Fermer la modale
+  const closeModal = () => {
+    setSelectedProduct(null);
+  };
+
   return (
-    <div className="py-24 bg-beige min-h-screen">
+    <div className="py-24 bg-gray-100 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-serif font-bold text-wood mb-4">Nos Réalisations</h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">Découvrez notre collection de meubles artisanaux, fabriqués avec passion et savoir-faire.</p>
-        </div>
-        
-        {/* Catégories */}
-        <div className="flex flex-wrap justify-center mb-12 space-x-2">
-          {categories.map(category => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-4 py-2 rounded-full mb-2 ${activeCategory === category ? 'bg-wood text-white' : 'bg-white text-gray-700 hover:bg-wood-light hover:text-white'} transition duration-300`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-        
-        {/* Galerie de produits */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProducts.map(product => (
-            <div key={product.id} className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-xl transition duration-300">
-              <div className="h-64 overflow-hidden">
-                <img 
-                  src={product.image} 
-                  alt={product.name} 
-                  className="w-full h-full object-cover transition duration-300 transform hover:scale-105"
-                />
-              </div>
-              <div className="p-6">
-                <div className="flex justify-between items-start mb-2">
-                  <h3 className="text-xl font-bold">{product.name}</h3>
-                  <span className="bg-wood-light text-wood text-xs px-2 py-1 rounded-full">{product.category}</span>
-                </div>
-                <p className="text-gray-600">{product.description}</p>
-                <button className="mt-4 bg-wood hover:bg-wood-light text-white font-medium py-2 px-4 rounded transition duration-300">
-                  Voir détails
-                </button>
-              </div>
+        <h1 className="text-4xl font-serif font-bold text-center mb-16 text-gray-800">
+          Nos Produits
+        </h1>
+
+        {productSections.map((section, index) => (
+          <section key={index} className="mb-20">
+            <div className="mb-8 text-center">
+              <h2 className="text-3xl font-semibold text-gray-700 mb-2">
+                {section.title}
+              </h2>
+              <p className="text-gray-500">{section.description}</p>
             </div>
-          ))}
-        </div>
-        
-        {/* Message si aucun produit */}
-        {filteredProducts.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-gray-600">Aucun produit trouvé dans cette catégorie.</p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+              {section.products.map((product) => (
+                <div
+                  key={product.id}
+                  className="bg-white rounded-lg shadow-md hover:shadow-xl overflow-hidden transition transform hover:-translate-y-1 hover:scale-[1.02] duration-300"
+                >
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="w-full h-64 object-cover"
+                  />
+                  <div className="p-4">
+                    <h3 className="text-xl font-bold mb-2">{product.name}</h3>
+                    <p className="text-gray-600 mb-4">{product.description}</p>
+                    <button
+                      onClick={() => openModal(product)}
+                      className="bg-wood hover:bg-wood-dark text-white py-2 px-6 rounded-lg font-semibold shadow-md hover:shadow-lg transition duration-300 active:scale-95"
+                    >
+                      Voir détails
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+
+        {/* MODALE */}
+        {selectedProduct && (
+          <div
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+            onClick={closeModal}
+          >
+            <div
+              className="bg-white rounded-lg max-w-lg w-full p-6 relative transform transition-transform duration-300 ease-out scale-100"
+              onClick={(e) => e.stopPropagation()}
+              style={{ animation: "fadeInScale 0.3s ease forwards" }}
+            >
+              <button
+                onClick={closeModal}
+                className="absolute top-2 right-2 text-gray-700 hover:text-gray-900 text-2xl font-bold"
+                aria-label="Fermer la modale"
+              >
+                &times;
+              </button>
+
+              <img
+                src={selectedProduct.image}
+                alt={selectedProduct.name}
+                className="w-full h-64 object-cover rounded"
+              />
+              <h2 className="text-2xl font-bold mt-4">{selectedProduct.name}</h2>
+              <p className="mt-2 text-gray-700">{selectedProduct.description}</p>
+
+              {/* Tu peux ajouter plus d'infos ici */}
+              <p className="mt-4 text-sm text-gray-500">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+                vehicula cursus vestibulum.
+              </p>
+
+              <button
+                onClick={closeModal}
+                className="mt-6 bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded"
+              >
+                Fermer
+              </button>
+            </div>
           </div>
         )}
       </div>
