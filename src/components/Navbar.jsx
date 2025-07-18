@@ -73,7 +73,7 @@ const Navbar = () => {
               Produits
             </Link>
             <Link
-              to="/a-propos"
+              to="/about"
               className="text-gray-700 hover:text-wood block px-3 py-2 text-base font-medium"
               onClick={() => setIsOpen(false)}
             >
