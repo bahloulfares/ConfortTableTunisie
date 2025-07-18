@@ -9,7 +9,7 @@ const productSections = [
         id: 1,
         name: 'Salon de thé (2 places)',
         description: 'Idéal pour les petits espaces.',
-        image: 'https://via.placeholder.com/400x300?text=Salon+2+places',
+        image: 'https://i.pinimg.com/736x/b3/92/3f/b3923fb3187541cacfc2e381da7e5b54.jpg',
       },
       {
         id: 2,
