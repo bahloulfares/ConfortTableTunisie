@@ -22,7 +22,7 @@ const Navbar = () => {
             <Link to="/produits" className="text-gray-700 hover:text-wood px-3 py-2 text-sm font-medium">
               Produits
             </Link>
-            <Link to="/a-propos" className="text-gray-700 hover:text-wood px-3 py-2 text-sm font-medium">
+            <Link to="/about" className="text-gray-700 hover:text-wood px-3 py-2 text-sm font-medium">
               À propos
             </Link>
             <Link to="/contact" className="text-gray-700 hover:text-wood px-3 py-2 text-sm font-medium">

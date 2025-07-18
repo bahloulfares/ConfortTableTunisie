@@ -51,7 +51,7 @@ const Home = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold mb-2">Qualité artisanale</h3>
+              <h3 className="text-xl font-bold mb-2">Qualité</h3>
               <p className="text-gray-600">Chaque pièce est fabriquée à la main selon des techniques traditionnelles transmises de génération en génération.</p>
             </div>
 
@@ -96,7 +96,7 @@ const Home = () => {
                   ))}
                 </div>
               </div>
-              <p className="text-gray-600 mb-4">"La table que j'ai commandée est magnifique, exactement comme je l'imaginais. Le bois est superbe et la finition impeccable."</p>
+              <p className="text-gray-600 mb-4">"La salon de thé que j'ai commandée est magnifique, exactement comme je l'imaginais. Le bois est superbe et la finition impeccable."</p>
               <p className="font-bold">Marie Dupont</p>
             </div>
 
