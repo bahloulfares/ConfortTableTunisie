@@ -1,40 +1,42 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import meubleImage from '../images/image-Artguru.png';
+import meubleImage from '../images/Logo.webp';
 
 const Home = () => {
   return (
     <div>
-      {/* Hero Section */}
-      <div className="relative h-screen">
-        <div className="absolute inset-0 bg-black opacity-40 z-0"></div>
+      <section
+        aria-label="Section d'accueil Confort Table Tunisie"
+        className="relative w-full min-h-[80vh] md:min-h-screen bg-[#b6a895] flex items-center justify-center overflow-hidden"
+      >
+        {/* Image de fond en background CSS pour un affichage professionnel */}
+        
         <div
-          className="absolute inset-0 bg-cover bg-center z-0"
-          //style={{ backgroundImage: "url('/meuble.jpg')" }}
+          className="absolute inset-0 bg-center bg-contain bg-no-repeat"
           style={{ backgroundImage: `url(${meubleImage})` }}
-
+          aria-hidden="true"
         ></div>
 
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-white text-center px-4">
-          <div style={{ paddingBottom: "400px" }}>
-            <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6 text-white drop-shadow-[3px_3px_6px_rgba(0,0,0,0.8)]">
-              Confort Table Tunisie
-            </h1>
+        {/* Overlay dégradé doux pour contraste texte */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/30 to-transparent z-10 pointer-events-none"></div>
 
-
-            <p className="text-xl md:text-2xl mb-4 text-white drop-shadow-[1px_1px_3px_rgba(0,0,0,0.6)]">
-              Des meubles faits main avec passion
-            </p>
-            <Link
-              to="/produits"
-              className="bg-wood hover:bg-wood-light text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105"
-            >
-              Voir nos réalisations
-            </Link>
-          </div>
-
+        {/* Contenu principal centré */}
+        <div className="relative z-20 max-w-5xl px-6 text-center text-white">
+          <br /><br /><br /><br /><br />
+          {/* <h1 className="text-4xl md:text-6xl font-serif font-bold mb-6 drop-shadow-lg">
+            Confort Table Tunisie
+          </h1> */}
+          <p className="text-lg md:text-2xl mb-8 drop-shadow-md">
+            Des meubles faits main avec passion
+          </p><br /><br />
+          <Link
+            to="/produits"
+            className="inline-block bg-wood hover:bg-wood-light text-white font-bold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-wood/50"
+          >
+            Voir nos réalisations
+          </Link>
         </div>
-      </div>
+      </section>
 
       {/* Features Section */}
       <div className="py-16 bg-beige">
