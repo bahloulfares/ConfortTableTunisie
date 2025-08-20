@@ -7,6 +7,7 @@ import Products from "./pages/Products";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import "./App.css";
+import ProductDetail from "./pages/ProductDetail";
 
 function App() {
   return (
@@ -17,7 +18,12 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             {/* <Route path="/products" element={<Products />} /> */}
-            <Route path="/produits" element={<Products />} />
+            {/* <Route path="/produits" element={<Products />} /> */}
+            <Route path="/produits" element={<Products />} />   {/* ✅ */}
+            {/* <Route path="/returnProduct" element={<Products />} />   ✅ */}
+            {/* <Route path="/produit/:id" element={<ProductDetail/>} /> */}
+            <Route path="/product/:id" element={<ProductDetail />} />
+
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
           </Routes>
