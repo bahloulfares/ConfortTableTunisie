@@ -45,7 +45,8 @@ const Cart = () => {
         </div>
       ) : (
         <>
-          <div className="bg-white rounded-lg shadow-md overflow-hidden mb-8">
+          {/* Version desktop - tableau */}
+          <div className="hidden md:block bg-white rounded-lg shadow-md overflow-hidden mb-8">
             <table className="w-full">
               <thead className="bg-gray-50">
                 <tr>
@@ -106,14 +107,16 @@ const Cart = () => {
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="h-5 w-5"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
+                          className="h-6 w-6"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
                         >
                           <path
-                            fillRule="evenodd"
-                            d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
-                            clipRule="evenodd"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
                           />
                         </svg>
                       </button>
@@ -124,27 +127,88 @@ const Cart = () => {
             </table>
           </div>
 
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex gap-4">
-              <button
-                onClick={clearCart}
-                className="px-6 py-3 bg-red-100 text-red-700 font-medium rounded-lg hover:bg-red-200 transition-colors"
-              >
-                Vider le panier
-              </button>
+          {/* Version mobile - cartes */}
+          <div className="md:hidden space-y-4">
+            {cartItems.map((item) => (
+              <div key={item.id} className="bg-white rounded-lg shadow-md p-4">
+                <div className="flex items-center mb-4">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="h-16 w-16 object-cover rounded-md mr-4"
+                  />
+                  <div>
+                    <h3 className="text-lg font-medium text-gray-900">
+                      {item.name}
+                    </h3>
+                    <p className="text-sm text-gray-500">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+                
+                <div className="flex justify-between items-center">
+                  <div className="flex items-center">
+                    <button
+                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      className="bg-gray-200 text-gray-700 rounded-l-md px-3 py-1"
+                    >
+                      -
+                    </button>
+                    <span className="px-4 py-1 bg-gray-100">
+                      {item.quantity}
+                    </span>
+                    <button
+                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      className="bg-gray-200 text-gray-700 rounded-r-md px-3 py-1"
+                    >
+                      +
+                    </button>
+                  </div>
+                  
+                  <button
+                    onClick={() => removeFromCart(item.id)}
+                    className="text-red-500 hover:text-red-700"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-col md:flex-row justify-between mt-8 gap-4">
+            <button
+              onClick={clearCart}
+              className="bg-red-100 text-red-700 hover:bg-red-200 font-medium py-2 px-4 rounded-lg transition"
+            >
+              Vider le panier
+            </button>
+            <div className="flex flex-col md:flex-row gap-4">
               <Link
                 to="/produits"
-                className="px-6 py-3 bg-gray-100 text-gray-700 font-medium rounded-lg hover:bg-gray-200 transition-colors"
+                className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition text-center"
               >
                 Continuer les achats
               </Link>
-            </div>
-            <div>
               <Link
                 to="/demande-devis"
-                className="px-6 py-3 bg-wood hover:bg-wood-dark text-white font-bold rounded-lg transition duration-300"
+                className="bg-wood hover:bg-wood-dark text-white font-bold py-2 px-4 rounded-lg transition text-center"
               >
-                Demander un devis ({totalItems} article{totalItems > 1 ? "s" : ""})
+                Demander un devis ({totalItems} {totalItems > 1 ? "articles" : "article"})
               </Link>
             </div>
           </div>

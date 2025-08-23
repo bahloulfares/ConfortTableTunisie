@@ -73,7 +73,7 @@ const ProductDetail = () => {
             <p className="text-gray-700 text-lg mb-6">{selectedProduct.description}</p>
 
             {/* Couleurs disponibles */}
-            <div className="mt-6">
+            {/* <div className="mt-6">
               <h3 className="text-lg font-medium mb-2">Couleurs disponibles :</h3>
               <div className="flex gap-3">
                 {selectedProduct.colors?.map((colorClass, idx) => (
@@ -84,7 +84,14 @@ const ProductDetail = () => {
                   ></span>
                 ))}
               </div>
-            </div>
+            </div> */}
+            <div className="mt-6">
+  <h3 className="text-lg font-medium mb-2">Sur mesure :</h3>
+  <p className="text-gray-700">
+    Nous créons des meubles personnalisés selon vos besoins, vos goûts et les dimensions de votre espace.
+  </p>
+</div>
+
           </div>
 
           {/* Bouton d'action */}
