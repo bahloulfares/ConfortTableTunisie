@@ -43,8 +43,8 @@ const Contact = () => {
                 <i className="fas fa-phone-alt text-3xl text-[#5a3825]"></i>
               </div>
               <h3 className="text-2xl font-semibold mb-2">Contact</h3>
-              <p className="text-base font-light">+216 20 000 000</p>
-              <p className="text-base font-light">contact@gmail.com</p>
+              <p className="text-base font-light">+216 25 000 691</p>
+              <p className="text-base font-light">hassairi.rfk@gmail.com</p>
             </div>
 
           </div>
