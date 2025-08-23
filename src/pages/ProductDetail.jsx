@@ -1,10 +1,12 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import productSections from "../Data/Products";
+import { useCart } from "../context/CartContext"; // Import du hook useCart
 
 const ProductDetail = () => {
   const { id } = useParams();
   const productId = parseInt(id, 10);
+  const { addToCart } = useCart(); // Utilisation du hook
 
   let selectedProduct = null;
   for (const section of productSections) {
@@ -16,35 +18,33 @@ const ProductDetail = () => {
     return <p className="text-center mt-20 text-xl text-red-600">Produit non trouvé ❌</p>;
   }
 
+  // Fonction pour ajouter le produit au panier
+  const handleAddToCart = () => {
+    addToCart(selectedProduct);
+    // Afficher une notification de confirmation
+    alert("Produit ajouté au panier !");
+  };
+
   return (
     <div className="py-16 px-4 max-w-6xl mx-auto">
-      {/* Bouton retour */}
-      {/* <Link
-        to="/returnProduct"
-  className="inline-flex items-center px-5 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-200"
-      >
-        <span className="mr-2">←</span> 
-      </Link>  <br /> <br /> */}
-
       <Link
-  to="/produits"
-  className="inline-flex items-center gap-2 px-4 py-2 text-gray-10000 bg-gray-100 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200"
->
-  {/* Icône de quitter (flèche vers la gauche) */}
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    className="h-5 w-5"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-    strokeWidth={2}
-  >
-    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-  </svg>
-  
-  Retour aux produits
-</Link>
-<br /><br />
+        to="/produits"
+        className="inline-flex items-center gap-2 px-4 py-2 text-gray-10000 bg-gray-100 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+        
+        Retour aux produits
+      </Link>
+      <br /><br />
 
       <div className="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col md:flex-row gap-8">
         {/* Partie Image */}
@@ -72,34 +72,30 @@ const ProductDetail = () => {
             {/* Description */}
             <p className="text-gray-700 text-lg mb-6">{selectedProduct.description}</p>
 
-            {/* Informations supplémentaires */}
-            {/* {selectedProduct.price && (
-              <p className="text-xl font-semibold text-gray-900 mb-4">
-                Prix : <span className="text-green-600">{selectedProduct.price} TND</span>
-              </p>
-            )} */}
+            {/* Couleurs disponibles */}
             <div className="mt-6">
-  <h3 className="text-lg font-medium mb-2">Couleurs disponibles :</h3>
-  <div className="flex gap-3">
-    {selectedProduct.colors?.map((colorClass, idx) => (
-      <span
-        key={idx}
-        className={`w-8 h-8 rounded-full cursor-pointer border-2 border-gray-200 ${colorClass} hover:scale-110 transform transition`}
-        title={`Couleur ${idx + 1}`}
-      ></span>
-    ))}
-  </div>
-</div>
-
+              <h3 className="text-lg font-medium mb-2">Couleurs disponibles :</h3>
+              <div className="flex gap-3">
+                {selectedProduct.colors?.map((colorClass, idx) => (
+                  <span
+                    key={idx}
+                    className={`w-8 h-8 rounded-full cursor-pointer border-2 border-gray-200 ${colorClass} hover:scale-110 transform transition`}
+                    title={`Couleur ${idx + 1}`}
+                  ></span>
+                ))}
+              </div>
+            </div>
           </div>
 
           {/* Bouton d'action */}
-          {/* <div className="mt-6">
-            <button className="w-full md:w-auto px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors">
+          <div className="mt-6">
+            <button 
+              onClick={handleAddToCart}
+              className="w-full md:w-auto px-6 py-3 bg-wood hover:bg-wood-dark text-white font-semibold rounded-lg shadow-md hover:shadow-lg transition-colors duration-300 active:scale-95"
+            >
               Ajouter au panier
             </button>
-          </div> */}
-          
+          </div>
         </div>
       </div>
     </div>
