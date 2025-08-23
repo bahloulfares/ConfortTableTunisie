@@ -35,7 +35,7 @@ const QuoteForm = () => {
   };
 
   // Adresse email de réception des demandes de devis
-  const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/bahloulfares3@gmail.com";
+  const FORMSUBMIT_ENDPOINT = "https://formsubmit.co/ajax/bahloulfares3@gmail.com";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
